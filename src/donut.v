@@ -11,7 +11,7 @@ module donut (
   output reg [5:0] donut_luma
 );
 
-// copied from vgademo.v
+// copied from vgadonut.v
 parameter H_DISPLAY = 1220;
 parameter H_TOTAL = 1525;
 parameter V_TOTAL = 525;
@@ -93,7 +93,7 @@ wire hit_unstable;
 
 donuthit donuthit (
   .clk(clk),
-  .start(h_count[3:0] == 0),
+  .start(h_count[3:0] == 0 && h_count < H_DISPLAY-8),
   .pxin(px),
   .pyin(py),
   .pzin(pz),

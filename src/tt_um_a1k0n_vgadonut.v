@@ -19,7 +19,7 @@ module tt_um_a1k0n_vgadonut(
   wire [1:0] G;
   wire [1:0] B;
 
-  vgademo vgademo(
+  vgadonut vgadonut(
     .clk48(clk),
     .vsync(vsync),
     .hsync(hsync),

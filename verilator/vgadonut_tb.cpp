@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "Vvgademo.h"
+#include "Vvgadonut.h"
 #include "verilated.h"
 #include <SDL2/SDL.h>
 
@@ -27,7 +27,7 @@ static inline uint32_t lowextend6(uint32_t x) {
 int main(int argc, char** argv) {
   Verilated::commandArgs(argc, argv);
 
-  Vvgademo* top = new Vvgademo;
+  Vvgadonut* top = new Vvgadonut;
 
   top->rst_n = 0;
   top->clk48 = 0; top->eval(); top->clk48 = 1; top->eval();
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
   }
 
   // Create a window
-  SDL_Window* window = SDL_CreateWindow("VGA Demo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, H_DISPLAY, V_DISPLAY*2, 0);
+  SDL_Window* window = SDL_CreateWindow("VGA donut", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, H_DISPLAY, V_DISPLAY*2, 0);
   if (window == nullptr) {
     SDL_Log("Failed to create window: %s", SDL_GetError());
     SDL_Quit();

@@ -1,6 +1,6 @@
 `default_nettype none
 
-module vgademo (
+module vgadonut (
     input clk48,
     input rst_n,
     output reg vsync,  // vsync
@@ -77,9 +77,19 @@ donut donut(
     .donut_visible(donut_visible)
 );
 
-wire [5:0] r = donut_visible ? donut_luma      : 0;
-wire [5:0] g = donut_visible ? 0               : 0;
-wire [5:0] b = donut_visible ? (donut_luma>>2) : 0;
+reg [5:0] palette_r [0:63];
+reg [5:0] palette_g [0:63];
+reg [5:0] palette_b [0:63];
+
+initial begin
+    $readmemh("../data/palette_r.hex", palette_r);
+    $readmemh("../data/palette_g.hex", palette_g);
+    $readmemh("../data/palette_b.hex", palette_b);
+end
+
+wire [5:0] r = donut_visible ? palette_r[donut_luma] : 0;
+wire [5:0] g = donut_visible ? palette_g[donut_luma] : 0;
+wire [5:0] b = donut_visible ? palette_b[donut_luma] : 0;
 
 // Bayer dithering
 // i is h_count[2:0] and j is v_count[2:0]

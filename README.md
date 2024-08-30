@@ -4,6 +4,9 @@
 
 ![preview](docs/preview.png)
 
+This is a racing-the-beam raymarching VGA output implementation of good ol'
+[donut.c](https://www.a1k0n.net/2021/01/13/optimizing-donut.html).
+
 - [Read the documentation for project](docs/info.md)
 
 ## What is Tiny Tapeout?

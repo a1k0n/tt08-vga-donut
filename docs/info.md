@@ -15,6 +15,8 @@ You can also include images in this folder and reference them in the markdown. E
 
 Renders a faceted donut to a VGA monitor.
 
+Like my other demo on tt08, this runs in a weird VGA resolution: 1220x480.
+
 Interestingly, it is not actually rendering any polygons; this is sphere traced
 (AKA raymarched), using a CORDIC unit to calculate the distance between a point
 and the surface of the torus. But, because we don't have much time (we're

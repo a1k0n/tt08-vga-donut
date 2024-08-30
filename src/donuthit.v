@@ -39,12 +39,11 @@ wire signed [15:0] step1_lx, step2_lz;
 wire signed [15:0] d = t2 - r1i;
 
 // this multiplier is unfortunate
-/*
 wire signed [13:0] px_projected = $signed(d[10:5]) * $signed(rx[15:9]);
 wire signed [13:0] py_projected = $signed(d[10:5]) * $signed(ry[15:9]);
 wire signed [13:0] pz_projected = $signed(d[10:5]) * $signed(rz[15:9]);
-*/
 
+/*
 wire signed [15:0] px_projected, py_projected, pz_projected;
 step3vec step3vec_x (
   .d(d[10:0]),
@@ -55,6 +54,7 @@ step3vec step3vec_x (
   .yout(py_projected),
   .zout(pz_projected)
 );
+*/
 
 wire _unused_ok = &{px_projected[5:0], py_projected[5:0], pz_projected[5:0],
   rx[9:0], ry[9:0], rz[9:0]};
