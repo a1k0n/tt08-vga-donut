@@ -15,8 +15,9 @@ project:
   source_files:        
     - "tt_um_a1k0n_vgadonut.v"
     - "vgadonut.v"
-    - "donuthit.v"
     - "cordic2step.v"
+    - "donuthit.v"
+    - "cordic3step.v"
     - "step3vec.v"
     - "donut.v"
 

@@ -63,7 +63,7 @@ wire _unused_ok = &{px_projected[5:0], py_projected[5:0], pz_projected[5:0],
   rx[9:0], ry[9:0], rz[9:0]};
   */
 
-cordic2step cordicxy (
+cordic3step cordicxy (
   .xin(px),
   .yin(py),
   .x2in(lx),
