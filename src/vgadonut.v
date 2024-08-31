@@ -23,7 +23,7 @@ parameter V_SYNC_PULSE = 2;
 parameter V_BACK_PORCH = 33;
 parameter V_TOTAL = 525;
 
-reg [0:0] frame;
+reg [7:0] frame;
 reg [10:0] h_count;
 reg [9:0] v_count;
 
@@ -88,9 +88,17 @@ initial begin
     $readmemh("../data/palette_b.hex", palette_b);
 end
 
-wire [5:0] r = donut_visible ? palette_r[donut_luma] : 0;
-wire [5:0] g = donut_visible ? palette_g[donut_luma] : 0;
-wire [5:0] b = donut_visible ? palette_b[donut_luma] : 0;
+wire [6:0] scrollh = h_count[6:0] + frame[6:0];
+wire [5:0] scrollv = v_count[5:0] + frame[7:2];
+wire chq = scrollh[6] ^ scrollv[5];
+
+wire [5:0] checker_r = chq ? 0 : 47;
+wire [5:0] checker_g = chq ? 15 : 47;
+wire [5:0] checker_b = chq ? 63 : 47;
+
+wire [5:0] r = donut_visible ? palette_r[donut_luma] : checker_r;
+wire [5:0] g = donut_visible ? palette_g[donut_luma] : checker_g;
+wire [5:0] b = donut_visible ? palette_b[donut_luma] : checker_b;
 
 // Bayer dithering
 // i is h_count[2:0] and j is v_count[2:0]
