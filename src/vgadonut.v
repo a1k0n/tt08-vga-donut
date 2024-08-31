@@ -74,7 +74,8 @@ donut donut(
     .h_count(h_count),
     .v_count(v_count),
     .donut_luma(donut_luma),
-    .donut_visible(donut_visible)
+    .donut_visible(donut_visible),
+    .frame(frame[0:0])
 );
 
 reg [5:0] palette_r [0:63];

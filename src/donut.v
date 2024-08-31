@@ -1,3 +1,5 @@
+`default_nettype none
+
 // render a ray-marched donut
 // takes 8 clock cycles per pixel, so this will have to be pipelined for
 // higher resolution
@@ -7,6 +9,7 @@ module donut (
   input rst_n,
   input [10:0] h_count,
   input [9:0] v_count,
+  input [0:0] frame,
   output reg donut_visible,
   output reg [5:0] donut_luma
 );
@@ -91,9 +94,11 @@ wire signed [15:0] lz = (-cAcB - sA) >>> 2;
 wire signed [15:0] luma_unstable;
 wire hit_unstable;
 
+wire [3:0] donutquery_start = v_count[0] ^ frame[0] ? 0 : 8;
+
 donuthit donuthit (
   .clk(clk),
-  .start(h_count[3:0] == 0 && h_count < H_DISPLAY-8),
+  .start(h_count[3:0] == donutquery_start && h_count < H_DISPLAY-8),
   .pxin(px),
   .pyin(py),
   .pzin(pz),
@@ -152,7 +157,7 @@ always @(posedge clk) begin
         rz6 <= ysA + xcAsB6 + (cAcB<<6);
       end
     end else if (h_count < H_DISPLAY-8) begin
-      if (h_count[3:0] == 0) begin
+      if (h_count[3:0] == donutquery_start) begin
         // latch output registers
         donut_visible <= hit_unstable;
         // todo: convert from -32..31 to 0..63

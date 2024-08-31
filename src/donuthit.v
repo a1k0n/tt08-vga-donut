@@ -1,3 +1,5 @@
+`default_nettype none
+
 // donut ray-marching hit test
 module donuthit (
     input clk,
@@ -39,11 +41,12 @@ wire signed [15:0] step1_lx, step2_lz;
 wire signed [15:0] d = t2 - r1i;
 
 // this multiplier is unfortunate
+/*
 wire signed [13:0] px_projected = $signed(d[10:5]) * $signed(rx[15:9]);
 wire signed [13:0] py_projected = $signed(d[10:5]) * $signed(ry[15:9]);
 wire signed [13:0] pz_projected = $signed(d[10:5]) * $signed(rz[15:9]);
+*/
 
-/*
 wire signed [15:0] px_projected, py_projected, pz_projected;
 step3vec step3vec_x (
   .d(d[10:0]),
@@ -54,10 +57,11 @@ step3vec step3vec_x (
   .yout(py_projected),
   .zout(pz_projected)
 );
-*/
 
+/*
 wire _unused_ok = &{px_projected[5:0], py_projected[5:0], pz_projected[5:0],
   rx[9:0], ry[9:0], rz[9:0]};
+  */
 
 cordic2step cordicxy (
   .xin(px),
@@ -98,13 +102,13 @@ always @(posedge clk) begin
     t <= t + d;
     hit <= hit & ((t+d) < 2048);
     /*
-    px <= px + {{2{px_projected[13]}}, px_projected};
-    py <= py + {{2{py_projected[13]}}, py_projected};
-    pz <= pz + {{2{pz_projected[13]}}, pz_projected};
+    px <= px + {{2{px_projected[13]}}, px_projected[13:0]};
+    py <= py + {{2{py_projected[13]}}, py_projected[13:0]};
+    pz <= pz + {{2{pz_projected[13]}}, pz_projected[13:0]};
     */
-    px <= px + px_projected;
-    py <= py + py_projected;
-    pz <= pz + pz_projected;
+    px <= px + px_projected + (px_projected>>>2);
+    py <= py + py_projected + (py_projected>>>2);
+    pz <= pz + pz_projected + (pz_projected>>>2);
   end
   light <= step2_lz;
 end
