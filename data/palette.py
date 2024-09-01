@@ -42,14 +42,10 @@ for i, color in enumerate(gradient):
     bhex.write(hex(color[2])[2:] + "\n")
 
 for i in range(maxshade, 64):
-    # print(f"Color {i}: RGB{tuple(gradient[-1])}")
     rhex.write(hex(gradient[-1][0])[2:] + "\n")
     ghex.write(hex(gradient[-1][1])[2:] + "\n")
     bhex.write(hex(gradient[-1][2])[2:] + "\n")
 
-# Optional: Verify the number of colors
-print(f"\nTotal colors in the gradient: {len(gradient)}")
-
 rhex.close()
 ghex.close()
-bhex.close
+bhex.close()

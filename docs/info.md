@@ -15,7 +15,8 @@ You can also include images in this folder and reference them in the markdown. E
 
 Renders a faceted donut to a VGA monitor.
 
-Like my other demo on tt08, this runs in a weird VGA resolution: 1220x480.
+Like my other demo on tt08, this runs in a weird VGA resolution: 1220x480, but
+still 4:3 aspect ratio like 640x480.
 
 Interestingly, it is not actually rendering any polygons; this is sphere traced
 (AKA raymarched), using a CORDIC unit to calculate the distance between a point
@@ -38,7 +39,7 @@ better than the screenshot above.
 
 ## How to test
 
-Run clock at 48MHz, connect VGA and sound Pmods, and give it a reset pulse.
+Connect VGA Pmod to output, set clock to 48MHz, and give it a reset pulse.
 
 ## External hardware
 
