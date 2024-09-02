@@ -132,21 +132,32 @@ always @(posedge clk) begin
         // ycA/ysA*240; 240 = 256 - 16
         ycA <= -(yincC6<<8) + (yincC6<<4);
         ysA <= -(yincS6<<8) + (yincS6<<4);
-        /*
-        this will be garbage on the first scanline but i don't care
-        rx6 <= -76*xincX6 - sB;
-        ry6 <= -yincC6*240 - xsAsB6 - sAcB;
-        rz6 <= -yincS6*240 + xcAsB6 + cAcB;
-        */
-        // also rotate cA, sA, cB, sB, cAsB, sAsB, cAcB, sAcB
-        cA <= cA1;
-        sA <= sA1;
-        cB <= cB1;
-        sB <= sB1;
-        cAsB <= cAsB2;
-        sAsB <= sAsB2;
-        cAcB <= cAcB2;
-        sAcB <= sAcB2;
+
+        // rotate cA, sA, cB, sB, cAsB, sAsB, cAcB, sAcB
+
+        // unfortunately the implicit rotation matrix here drifts over time which
+        // causes distortions if left running long enough; to fix this, we
+        // reinitialize sines and cosines whenever sB ticks from positive to
+        // negative, as that cooresponds to a full rotation of both axes
+        if (sB[15] && !sB1[15]) begin
+          cA <= 16'h2d3f;
+          sA <= 16'h2d3f;
+          cB <= 16'h4000;
+          sB <= 16'h0000;
+          sAsB <= 16'h0000;
+          cAsB <= 16'h0000;
+          sAcB <= 16'h2d3f;
+          cAcB <= 16'h2d3f;
+        end else begin
+          cA <= cA1;
+          sA <= sA1;
+          cB <= cB1;
+          sB <= sB1;
+          cAsB <= cAsB2;
+          sAsB <= sAsB2;
+          cAcB <= cAcB2;
+          sAcB <= sAcB2;
+        end
       end else begin
         // step y
         ycA <= ycA + yincC6;
