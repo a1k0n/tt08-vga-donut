@@ -101,14 +101,11 @@ wire [5:0] g = donut_visible ? palette_g[donut_luma] : checker_g;
 wire [5:0] b = donut_visible ? palette_b[donut_luma] : checker_b;
 
 // Bayer dithering
-// i is h_count[2:0] and j is v_count[2:0]
-// M(i,j) = bit_reverse(bit_interleave(i^j, i))
-// bit_interleave(i,j) = i[0]j[0]i[1]j[1]i[2]j[2]
-wire [2:0] bayer_i = h_count[2:0] ^ frame[0];
-wire [2:0] bayer_j = v_count[2:0];// + frame[1];
-//wire [5:0] bayer = {bayer_i[0]^bayer_j[0], bayer_i[0], bayer_i[1]^bayer_j[1], bayer_i[1], bayer_i[2]^bayer_j[2], bayer_i[2]};
 // this is a 8x4 Bayer matrix which gets toggled every frame (so the other 8x4 elements are actually on odd frames)
-wire [4:0] bayer = {bayer_i[0], bayer_i[1]^bayer_j[1], bayer_i[1], bayer_i[2]^bayer_j[2], bayer_i[2]};
+wire [2:0] bayer_i = h_count[2:0] ^ {3{frame[0]}};
+wire [1:0] bayer_j = v_count[1:0];
+wire [2:0] bayer_x = {bayer_i[2], bayer_i[1]^bayer_j[1], bayer_i[0]^bayer_j[0]};
+wire [4:0] bayer = {bayer_x[0], bayer_i[0], bayer_x[1], bayer_i[1], bayer_x[2]};
 
 // output dithered 2 bit color from 6 bit color and 5 bit Bayer matrix
 function [1:0] dither2;

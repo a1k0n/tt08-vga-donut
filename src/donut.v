@@ -112,7 +112,7 @@ donuthit donuthit (
   .light(luma_unstable)
 );
 
-always @(posedge clk) begin
+always @(posedge clk or negedge rst_n) begin
   if (~rst_n) begin
     cA <= 16'h2d3f;
     sA <= 16'h2d3f;
