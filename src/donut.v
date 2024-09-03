@@ -94,7 +94,7 @@ wire signed [15:0] lz = (-cAcB - sA) >>> 2;
 wire signed [15:0] luma_unstable;
 wire hit_unstable;
 
-wire [3:0] donutquery_start = {v_count[0] ^ frame[0], v_count[0], v_count[1], 1'b0};
+wire [3:0] donutquery_start = {v_count[0] ^ frame[0], v_count[0], v_count[1]^frame[0], 1'b0};
 
 donuthit donuthit (
   .clk(clk),
