@@ -92,9 +92,9 @@ wire [6:0] scrollh = h_count[6:0] + frame[6:0];
 wire [5:0] scrollv = v_count[5:0] + frame[7:2];
 wire chq = scrollh[6] ^ scrollv[5];
 
-wire [5:0] checker_r = chq ? 0 : 47;
-wire [5:0] checker_g = chq ? 15 : 47;
-wire [5:0] checker_b = chq ? 63 : 47;
+wire [5:0] checker_r = chq ? 0  : 42;
+wire [5:0] checker_g = chq ? 21 : 42;
+wire [5:0] checker_b = chq ? 63 : 42;
 
 wire [5:0] r = donut_visible ? palette_r[donut_luma] : checker_r;
 wire [5:0] g = donut_visible ? palette_g[donut_luma] : checker_g;
@@ -112,7 +112,7 @@ function [1:0] dither2;
     input [5:0] color6;
     input [4:0] bayer5;
     begin
-        dither2 = ({1'b0, color6} + {2'b0, bayer5} + color6[0]) >> 5;
+        dither2 = ({1'b0, color6} + {2'b0, bayer5} + color6[0] + color6[5] + color6[5:1]) >> 5;
     end
 endfunction
 
