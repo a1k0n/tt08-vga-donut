@@ -8,7 +8,7 @@ project:
   clock_hz:     48000000
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "3x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   top_module:  "tt_um_a1k0n_vgadonut"
 

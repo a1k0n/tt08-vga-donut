@@ -16,6 +16,7 @@
 
   "//": "Change the clock period here. 20000 ps = 20 ns corresponds to 50 MHz",
   "ABC_CLOCK_PERIOD_IN_PS": 20000,
+  "ABC_AREA": 1,
 
   "//": "Increase this if you are getting 'Synthesized memory size exceeds maximum allowed bits' error:",
   "SYNTH_MEMORY_MAX_BITS": 4096,
