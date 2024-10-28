@@ -11,7 +11,7 @@
 
   "//": "Here are some of the variables you may want to change:",
 
-  "PLACE_DENSITY": 0.69,
+  "PLACE_DENSITY": 0.88,
   "TNS_END_PERCENT": 100,
 
   "//": "Change the clock period here. 20000 ps = 20 ns corresponds to 50 MHz",
