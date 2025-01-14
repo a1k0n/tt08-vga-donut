@@ -112,9 +112,9 @@ int main(int argc, char** argv) {
 
 #if SAVE_FRAMES
     // Save the frame to a file
-    if (frame&1) {
+    if (frame < 402) {
       char filename[64];
-      sprintf(filename, "frame%04d.png", frame>>1);
+      sprintf(filename, "frame%04d.png", frame);
       SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels, H_DISPLAY, V_DISPLAY*2, 32, H_DISPLAY*4, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
       IMG_SavePNG(surface, filename);
       SDL_FreeSurface(surface);
