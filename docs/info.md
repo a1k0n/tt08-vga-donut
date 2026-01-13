@@ -13,7 +13,8 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Renders a faceted donut to a VGA monitor.
+Renders a faceted donut to a VGA monitor.  A much more detailed breakdown is
+available [on my blog](https://www.a1k0n.net/2025/01/10/tiny-tapeout-donut.html).
 
 Like my other demo on tt08, this runs in a weird VGA resolution: 1220x480, but
 still 4:3 aspect ratio like 640x480.
